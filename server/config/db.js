@@ -1,22 +1,29 @@
 import mongoose from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
+
+const DEFAULT_MONGO_URI = 'mongodb://localhost:27017/opd-management-app';
 
 const connectDB = async () => {
+  const mongoUri = process.env.MONGODB_URI || DEFAULT_MONGO_URI;
+
   try {
-    let mongoUri = process.env.MONGODB_URI;
-
-    if (!mongoUri) {
-      const memoryServer = await MongoMemoryServer.create();
-      mongoUri = memoryServer.getUri();
-      console.log('Using in-memory MongoDB for development');
-    }
-
     mongoose.set('strictQuery', false);
+    mongoose.connection.on('connected', () => {
+      console.log(`MongoDB connected: ${mongoUri}`);
+    });
+
+    mongoose.connection.on('error', (error) => {
+      console.error('MongoDB connection error:', error.message);
+    });
+
+    mongoose.connection.on('disconnected', () => {
+      console.warn('MongoDB disconnected');
+    });
+
     await mongoose.connect(mongoUri);
-    console.log('MongoDB connected successfully');
     return true;
   } catch (error) {
-    console.error('MongoDB connection error:', error.message);
+    console.error('Unable to connect to MongoDB at:', mongoUri);
+    console.error(error.message);
     throw error;
   }
 };

@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
+import mongoose from 'mongoose';
 import connectDB from './config/db.js';
 import healthRoutes from './routes/healthRoutes.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
@@ -33,11 +34,23 @@ app.use(errorHandler);
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
+
+    const shutdown = async () => {
+      console.log('Shutting down server...');
+      server.close(async () => {
+        await mongoose.disconnect();
+        process.exit(0);
+      });
+    };
+
+    process.on('SIGINT', shutdown);
+    process.on('SIGTERM', shutdown);
   } catch (error) {
     console.error('Failed to start server:', error.message);
+    await mongoose.disconnect();
     process.exit(1);
   }
 };

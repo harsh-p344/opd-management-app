@@ -22,10 +22,10 @@ Done When:
 
 ## Slice 0.2 Database
 
-* [ ] Configure MongoDB connection
-* [ ] Create db connection utility
-* [ ] Setup connection logging
-* [ ] Handle connection errors
+* [x] Configure MongoDB connection
+* [x] Create db connection utility
+* [x] Setup connection logging
+* [x] Handle connection errors
 
 Done When:
 
