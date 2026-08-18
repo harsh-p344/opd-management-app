@@ -4,13 +4,13 @@
 
 ## Slice 0.1 Project Setup
 
-* [ ] Create server folder structure
-* [ ] Create client folder structure
-* [ ] Setup Express server
-* [ ] Setup React + Vite
-* [ ] Setup Tailwind CSS
-* [ ] Setup environment variables
-* [ ] Setup gitignore
+* [x] Create server folder structure
+* [x] Create client folder structure
+* [x] Setup Express server
+* [x] Setup React + Vite
+* [x] Setup Tailwind CSS
+* [x] Setup environment variables
+* [x] Setup gitignore
 
 Done When:
 
