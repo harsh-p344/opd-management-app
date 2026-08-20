@@ -36,12 +36,12 @@ Done When:
 
 ## Slice 0.3 Core Infrastructure
 
-* [ ] Global error handler
-* [ ] Async error wrapper
-* [ ] Response helpers
-* [ ] Cookie parser
-* [ ] CORS configuration
-* [ ] Basic API structure
+* [x] Global error handler
+* [x] Async error wrapper
+* [x] Response helpers
+* [x] Cookie parser
+* [x] CORS configuration
+* [x] Basic API structure
 
 Done When:
 
