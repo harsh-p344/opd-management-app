@@ -54,9 +54,9 @@ Done When:
 
 ## Slice 1.1 User Model
 
-* [ ] Create User model
-* [ ] Password hashing
-* [ ] Role support (admin/nurse)
+* [x] Create User model
+* [x] Password hashing
+* [x] Role support (admin/nurse)
 
 Done When:
 
