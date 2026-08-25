@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import connectDB from './config/db.js';
 import healthRoutes from './routes/healthRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use('/api', healthRoutes);
+app.use('/api/auth', authRoutes);
 
 app.get('/', (_req, res) => {
   res.send('OPD Management API is running');

@@ -66,10 +66,13 @@ Done When:
 
 ## Slice 1.2 Login API
 
-* [ ] Create login endpoint
-* [ ] Validate credentials
-* [ ] Generate JWT
-* [ ] Set HTTP-only cookie
+* [x] Create login route
+* [x] Create login controller
+* [x] Create auth service
+* [x] Validate credentials in service
+* [x] Generate JWT in service
+* [x] Set HTTP-only cookie in controller/response flow
+* [x] Return user info + success response
 
 Done When:
 
