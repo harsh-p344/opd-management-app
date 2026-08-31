@@ -2,13 +2,19 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
 export const generateToken = (user) => {
+  if (!process.env.JWT_SECRET) {
+    const error = new Error('JWT_SECRET is not configured');
+    error.statusCode = 500;
+    throw error;
+  }
+
   return jwt.sign(
     {
       id: user._id,
       username: user.username,
       role: user.role,
     },
-    process.env.JWT_SECRET || 'clinic-opd-secret-key',
+    process.env.JWT_SECRET,
     {
       expiresIn: process.env.JWT_EXPIRES_IN || '7d',
     }

@@ -94,6 +94,24 @@ Done When:
 
 ---
 
+## Slice 1.4 Auth Middleware and Logout
+
+* [x] Add JWT auth middleware for protected routes
+* [x] Validate token on every protected request
+* [x] Remove raw token from login response and keep cookie-only auth
+* [x] Add logout endpoint to clear auth cookies
+* [x] Add role-based access for admin and nurse routes
+* [x] Ensure error middleware is registered after routes and does not call next() after sending the response
+
+Done When:
+
+* Protected APIs validate auth before processing requests
+* Logout works correctly
+* Admin and nurse roles are enforced correctly
+* Error middleware is placed correctly and does not double-handle errors
+
+---
+
 # PHASE 2 - DASHBOARD
 
 ## Slice 2.1 Dashboard Stats API
