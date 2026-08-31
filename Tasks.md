@@ -116,9 +116,9 @@ Done When:
 
 ## Slice 2.1 Dashboard Stats API
 
-* [ ] Dashboard route
-* [ ] Dashboard controller
-* [ ] Aggregate statistics
+* [x] Dashboard route
+* [x] Dashboard controller
+* [x] Aggregate statistics
 
 Return:
 
