@@ -136,10 +136,10 @@ Done When:
 
 ## Slice 2.2 Dashboard UI
 
-* [ ] Create Dashboard page
-* [ ] Create stat cards
-* [ ] Create quick actions
-* [ ] Create recent activity section
+* [x] Create Dashboard page
+* [x] Create stat cards
+* [x] Create quick actions
+* [x] Create recent activity section
 
 Done When:
 

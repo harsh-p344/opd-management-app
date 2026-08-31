@@ -1,13 +1,44 @@
-const stats = [
-  { label: 'Total Patients', value: '248' },
-  { label: 'Medicines', value: '1,284' },
-  { label: 'Expired', value: '09' },
-  { label: 'Low Stock', value: '14' },
-];
+import { useEffect, useState } from 'react';
+import { fetchDashboardStats } from '../services/dashboardService';
 
 const quickActions = ['New Patient', 'Prescription', 'Stock Entry', 'Expiry Review'];
 
 const DashboardPage = () => {
+  const [stats, setStats] = useState({
+    totalPatients: 0,
+    totalMedicines: 0,
+    expiredMedicines: 0,
+    nearExpiry: 0,
+    lowStock: 0,
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        const data = await fetchDashboardStats();
+        setStats(data);
+      } catch (loadError) {
+        setError(loadError.message || 'Failed to load dashboard statistics');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadStats();
+  }, []);
+
+  const statCards = [
+    { label: 'Total Patients', value: stats.totalPatients },
+    { label: 'Total Medicines', value: stats.totalMedicines },
+    { label: 'Expired Medicines', value: stats.expiredMedicines },
+    { label: 'Near Expiry', value: stats.nearExpiry },
+    { label: 'Low Stock', value: stats.lowStock },
+  ];
+
   return (
     <main className="min-h-screen bg-slate-950 px-6 py-10 text-slate-100">
       <div className="mx-auto max-w-6xl">
@@ -21,11 +52,19 @@ const DashboardPage = () => {
           </button>
         </header>
 
-        <section className="grid gap-4 md:grid-cols-4">
-          {stats.map((stat) => (
+        {error ? (
+          <div className="mb-6 rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+            {error}
+          </div>
+        ) : null}
+
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          {statCards.map((stat) => (
             <article key={stat.label} className="rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-lg shadow-slate-950/30">
               <p className="text-sm text-slate-400">{stat.label}</p>
-              <p className="mt-3 text-3xl font-bold text-white">{stat.value}</p>
+              <p className="mt-3 text-3xl font-bold text-white">
+                {loading ? '...' : stat.value}
+              </p>
             </article>
           ))}
         </section>
@@ -53,7 +92,7 @@ const DashboardPage = () => {
           <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
             <h2 className="text-xl font-semibold text-white">System Health</h2>
             <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              <li className="flex items-center justify-between"><span>API</span><span className="text-emerald-400">Online</span></li>
+              <li className="flex items-center justify-between"><span>API</span><span className="text-emerald-400">{loading ? 'Checking' : 'Online'}</span></li>
               <li className="flex items-center justify-between"><span>MongoDB</span><span className="text-emerald-400">Connected</span></li>
               <li className="flex items-center justify-between"><span>Inventory</span><span className="text-yellow-400">Monitor</span></li>
             </ul>
