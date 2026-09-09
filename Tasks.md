@@ -1,339 +1,283 @@
-# TASKS.md
+# Project Tasks
 
-# PHASE 0 - FOUNDATION
+## Foundation
 
-## Slice 0.1 Project Setup
+### 0.1 Project setup
 
-* [x] Create server folder structure
-* [x] Create client folder structure
-* [x] Setup Express server
-* [x] Setup React + Vite
-* [x] Setup Tailwind CSS
-* [x] Setup environment variables
-* [x] Setup gitignore
+- [x] Server structure
+- [x] Client structure
+- [x] Express server
+- [x] React and Vite
+- [x] Tailwind CSS
+- [x] Environment variables
+- [x] Gitignore
 
-Done When:
+Done when: Server, client, and Tailwind start successfully.
 
-* Server starts
-* Client starts
-* Tailwind works
+### 0.2 Database
 
----
+- [x] MongoDB connection
+- [x] Database utility
+- [x] Connection logging
+- [x] Connection failure handling
 
-## Slice 0.2 Database
+Done when: The database connects and failures are handled safely.
 
-* [x] Configure MongoDB connection
-* [x] Create db connection utility
-* [x] Setup connection logging
-* [x] Handle connection errors
+### 0.3 Core infrastructure
 
-Done When:
+- [x] Global error handler
+- [x] Async error wrapper
+- [x] Response helpers
+- [x] Cookie parser
+- [x] CORS configuration
+- [x] API structure
 
-* Database connects successfully
-* Server exits gracefully on failure
+Done when: Responses and errors use a consistent format.
 
----
+## Authentication
 
-## Slice 0.3 Core Infrastructure
+### 1.1 User model
 
-* [x] Global error handler
-* [x] Async error wrapper
-* [x] Response helpers
-* [x] Cookie parser
-* [x] CORS configuration
-* [x] Basic API structure
+- [x] User model
+- [x] Password hashing
+- [x] Admin and nurse roles
 
-Done When:
+Done when: Users are stored securely and roles are validated.
 
-* Errors return consistent format
-* APIs can return success/error responses
+### 1.2 Login API
 
----
+- [x] Login endpoint
+- [x] Credential validation
+- [x] JWT authentication
+- [x] HTTP-only auth cookie
+- [x] User response
 
-# PHASE 1 - AUTHENTICATION
+Done when: Valid login succeeds and invalid credentials return an error.
 
-## Slice 1.1 User Model
+### 1.3 Frontend login
 
-* [x] Create User model
-* [x] Password hashing
-* [x] Role support (admin/nurse)
+- [x] Login page
+- [x] Login form and validation
+- [x] Auth service
+- [x] Auth context
+- [x] Protected route
 
-Done When:
+Done when: Login works end to end and protected pages require authentication.
 
-* Users can be stored securely
+### 1.4 Auth middleware and logout
 
----
+- [x] JWT middleware
+- [x] Protected route validation
+- [x] Cookie-only authentication
+- [x] Logout endpoint
+- [x] Role-based access
+- [x] Centralized auth errors
 
-## Slice 1.2 Login API
+Done when: Protected APIs, logout, and admin/nurse permissions work correctly.
 
-* [x] Create login route
-* [x] Create login controller
-* [x] Create auth service
-* [x] Validate credentials in service
-* [x] Generate JWT in service
-* [x] Set HTTP-only cookie in controller/response flow
-* [x] Return user info + success response
+## Dashboard
 
-Done When:
+### 2.1 Dashboard stats API
 
-* Login returns cookie
+- [x] Dashboard route
+- [x] Dashboard controller
+- [x] Aggregate statistics
+- [x] Patient count
+- [x] Medicine count
+- [x] Expired medicine count
+- [x] Near-expiry count
+- [x] Low-stock count
 
----
+Done when: The stats endpoint returns accurate data.
 
-## Slice 1.3 Frontend Login
+### 2.2 Dashboard UI
 
-* [ ] Create Login page
-* [ ] Create auth service
-* [ ] Create protected routes
-* [ ] Create auth context
+- [x] Dashboard page
+- [x] Stat cards
+- [x] Quick actions
+- [x] Recent activity section
+- [x] Loading and error states
 
-Done When:
+Done when: The dashboard displays live data.
 
-* User can login
-* Protected pages work
+### 2.3 Dashboard Rebuild
 
----
+- [ ] Structure: Layout → Sidebar + Header + MainContent
+- [ ] Top: 4 StatCards for key metrics
+- [ ] Bottom: Recent OPD Entries + Complaint Frequency
+- [ ] UX: API-ready data, actions, loading/empty/error states
+- [ ] Responsive: Desktop/tablet/mobile layouts and navigation
+- [ ] Design: Premium futuristic UI, restrained palette, clear hierarchy
+- [ ] Quality: Reusable, accessible, consistent, no overflow/errors
 
-## Slice 1.4 Auth Middleware and Logout
+### Done When
 
-* [x] Add JWT auth middleware for protected routes
-* [x] Validate token on every protected request
-* [x] Remove raw token from login response and keep cookie-only auth
-* [x] Add logout endpoint to clear auth cookies
-* [x] Add role-based access for admin and nurse routes
-* [x] Ensure error middleware is registered after routes and does not call next() after sending the response
+- [ ] UI, data, and interactions work
+- [ ] Responsive across all screen sizes
+- [ ] No broken states, overflow, or console errors
+- [ ] Accessible and production-ready
 
-Done When:
+## Medicine inventory
 
-* Protected APIs validate auth before processing requests
-* Logout works correctly
-* Admin and nurse roles are enforced correctly
-* Error middleware is placed correctly and does not double-handle errors
+### 3.1 Medicine model
 
----
+- [ ] Medicine model
+- [ ] Batch schema
+- [ ] Automatic total stock calculation
 
-# PHASE 2 - DASHBOARD
+Done when: Medicine and batch data are stored correctly and stock totals stay consistent.
 
-## Slice 2.1 Dashboard Stats API
+### 3.2 Medicine API
 
-* [x] Dashboard route
-* [x] Dashboard controller
-* [x] Aggregate statistics
+- [ ] Create medicine
+- [ ] Update medicine
+- [ ] Delete medicine
+- [ ] Search medicines
+- [ ] Pagination
+- [ ] Filters
 
-Return:
+Done when: Inventory CRUD, validation, authentication, and business rules work.
 
-* Total Patients
-* Total Medicines
-* Expired Medicines
-* Near Expiry
-* Low Stock
+### 3.3 Medicine Page
 
-Done When:
+- [ ] Structure: Layout → Sidebar + Header + MainContent
+- [ ] Top: 4 Stats — Total, Low Stock, Near Expiry, Expired
+- [ ] Bottom: Medicine inventory table — stock, batch, expiry, status, actions
+- [ ] UX: Search, filters, pagination, API-ready states
+- [ ] Responsive: Desktop/tablet/mobile, no overflow
+- [ ] Design: Premium, futuristic, clear hierarchy
+- [ ] Quality: Accessible, reusable, consistent, no errors
 
-* Stats endpoint returns data
+### Done When
 
----
+- [ ] All data/actions work
+- [ ] Responsive and accessible
+- [ ] No broken states or overflow
 
-## Slice 2.2 Dashboard UI
+## Stock bills
 
-* [x] Create Dashboard page
-* [x] Create stat cards
-* [x] Create quick actions
-* [x] Create recent activity section
+### 4.1 Stock bill model
 
-Done When:
+- [ ] StockBill model
+- [ ] Bill number generator
 
-* Dashboard displays real data
+Done when: Bills are stored correctly.
 
----
+### 4.2 Stock bill API
 
-# PHASE 3 - MEDICINE INVENTORY
+- [ ] Create bill endpoint
+- [ ] Add stock automatically
+- [ ] Create missing medicine
+- [ ] List bills
+- [ ] View bill details
 
-## Slice 3.1 Medicine Model
+Done when: Bills update inventory correctly and operations are atomic.
 
-* [ ] Create Medicine model
-* [ ] Create Batch schema
-* [ ] Auto totalStock calculation
+### 4.3 Stock Management
 
-Done When:
+- [ ] Structure: Layout → Sidebar + Header + MainContent
+- [ ] Left: Stock Bills list/history
+- [ ] Top: Add Medicine — Name, Price, Expiry, Purchase Date, Supplier + Add
+- [ ] Bottom: Added medicines, cost, Bill No. + Submit
+- [ ] Business: Submit saves bill and increases stock
+- [ ] UX: API-ready, responsive, loading/empty/error states
+- [ ] Quality: Accessible, reusable, no errors
 
-* Medicines can be stored
+### Done When
 
----
+- [ ] Add medicines and submit bills
+- [ ] Stock updates correctly
+- [ ] Responsive and error-free
 
-## Slice 3.2 Medicine APIs
+## OPD management
 
-* [ ] Create medicine
-* [ ] Update medicine
-* [ ] Delete medicine
-* [ ] Search medicines
-* [ ] Pagination
-* [ ] Filters
+### 5.1 Patient model
 
-Done When:
+- [ ] Patient model
+- [ ] Prescription schema
+- [ ] Validation rules
 
-* Inventory CRUD works
+Done when: Patient and prescription data are stored correctly.
 
----
+### 5.2 Patient API
 
-## Slice 3.3 Medicines Page
+- [ ] Create patient
+- [ ] Validate medicine stock
+- [ ] Deduct stock
+- [ ] List patients
+- [ ] Search patients
+- [ ] Pagination
+- [ ] View patient
 
-* [ ] Inventory table
-* [ ] Search
-* [ ] Filters
-* [ ] Add modal
-* [ ] Edit modal
-* [ ] Delete action
+Done when: OPD records and stock deduction work end to end.
 
-Done When:
+### 5.3 OPD Page
 
-* Inventory fully manageable
+- [ ] Structure: Layout → Sidebar + Header + MainContent
+- [ ] Top: OPD patient form with all required patient/visit fields
+- [ ] Bottom: Patient records table displaying all submitted form data
+- [ ] Business: Form submission creates a patient/OPD record
+- [ ] UX: API-ready, loading/empty/error states, clear feedback
+- [ ] Responsive: Desktop/tablet/mobile without overflow
+- [ ] Quality: Accessible, reusable, consistent, no errors
 
----
+### Done When
 
-# PHASE 4 - STOCK BILLS
+- [ ] OPD records can be submitted and displayed
+- [ ] All form data appears correctly in the table
+- [ ] Responsive and error-free
 
-## Slice 4.1 Stock Bill Model
+## Expiry management
 
-* [ ] Create StockBill model
-* [ ] Bill number generator
+### 6.1 Expiry API
 
-Done When:
+- [ ] Expired batches endpoint
+- [ ] Near-expiry endpoint
+- [ ] Scrap endpoint
+- [ ] Scrap record creation
 
-* Bills can be stored
+Done when: Expiry and scrap workflows work correctly.
 
----
+### 6.2 Expiry Page
 
-## Slice 4.2 Stock Bill APIs
+- [ ] Structure: Layout → Sidebar + Header + MainContent
+- [ ] Columns: Expired | Near Expiry | Scrapped
+- [ ] Actions: Expired medicines can be scrapped
+- [ ] Business: Scrapping moves the medicine to Scrapped and removes its stock
+- [ ] UX: API-ready, responsive, loading/empty/error states
+- [ ] Quality: Accessible, reusable, no errors
 
-* [ ] Create bill endpoint
-* [ ] Auto stock addition
-* [ ] Create medicine if missing
-* [ ] Bill listing
-* [ ] Bill details
+### Done When
 
-Done When:
+- [ ] Expired, near-expiry, and scrapped medicines display correctly
+- [ ] Expired medicines can be scrapped successfully
+- [ ] Responsive and error-free
 
-* Inventory updates from bills
+## Polish and release
 
----
+### 7.1 UX improvements
 
-## Slice 4.3 Stock Bills UI
+- [ ] Loading states
+- [ ] Empty states
+- [ ] Error states
+- [ ] Toast notifications
+- [ ] Form feedback
 
-* [ ] Bills sidebar
-* [ ] Bill form
-* [ ] Bill summary
-* [ ] Bill viewer
+### 7.2 Testing
 
-Done When:
+- [ ] Login flow
+- [ ] Protected routes
+- [ ] Stock deduction
+- [ ] Stock addition
+- [ ] Expiry detection
+- [ ] Scrap workflow
+- [ ] Dashboard statistics
 
-* Bills can be created from UI
+### 7.3 Production readiness
 
----
+- [ ] Environment review
+- [ ] Security review
+- [x] Seed admin user
+- [ ] Deployment setup
 
-# PHASE 5 - OPD MANAGEMENT
-
-## Slice 5.1 Patient Model
-
-* [ ] Create Patient model
-* [ ] Prescription schema
-* [ ] Validation rules
-
-Done When:
-
-* Patients can be stored
-
----
-
-## Slice 5.2 Patient APIs
-
-* [ ] Create patient
-* [ ] Validate stock
-* [ ] Deduct stock
-* [ ] List patients
-* [ ] Search patients
-* [ ] Pagination
-* [ ] View patient
-
-Done When:
-
-* OPD entries work end-to-end
-
----
-
-## Slice 5.3 OPD Page
-
-* [ ] Patient form
-* [ ] Medicine selection
-* [ ] File upload
-* [ ] Patient table
-* [ ] Search
-* [ ] Pagination
-
-Done When:
-
-* Nurse can create OPD entries
-
----
-
-# PHASE 6 - EXPIRY MANAGEMENT
-
-## Slice 6.1 Expiry APIs
-
-* [ ] Expired batches endpoint
-* [ ] Near expiry endpoint
-* [ ] Scrap endpoint
-* [ ] Scrap record creation
-
-Done When:
-
-* Expiry workflow functions
-
----
-
-## Slice 6.2 Expiry UI
-
-* [ ] Expired tab
-* [ ] Near expiry tab
-* [ ] Scrapped tab
-* [ ] Search
-* [ ] Scrap action
-
-Done When:
-
-* Expiry management complete
-
----
-
-# PHASE 7 - POLISH
-
-## Slice 7.1 UX Improvements
-
-* [ ] Loading states
-* [ ] Empty states
-* [ ] Error states
-* [ ] Toast notifications
-
----
-
-## Slice 7.2 Testing
-
-* [ ] Login flow
-* [ ] Stock deduction
-* [ ] Stock addition
-* [ ] Expiry detection
-* [ ] Scrap workflow
-* [ ] Dashboard statistics
-
----
-
-## Slice 7.3 Production Readiness
-
-* [ ] Environment review
-* [ ] Security review
-* [ ] Seed admin user
-* [ ] Deployment setup
-
-Done When:
-
-* Application ready for production demo
+Done when: The application is ready for a production demo.
