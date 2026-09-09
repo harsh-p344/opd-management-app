@@ -2,10 +2,10 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import { sendError } from '../utils/response.js';
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
 export const requireAuth = async (req, res, next) => {
-  if (!JWT_SECRET) {
+  const jwtSecret = process.env.JWT_SECRET;
+
+  if (!jwtSecret) {
     return sendError(res, 500, 'JWT_SECRET is not configured');
   }
   const token = req.cookies?.token;
@@ -15,7 +15,7 @@ export const requireAuth = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, jwtSecret);
     const user = await User.findById(decoded.id).select('-password');
 
     if (!user) {
