@@ -2,7 +2,7 @@ html, body, #root {
   min-height: 100%;
   margin: 0;
   font-family: Inter, 'Segoe UI', sans-serif;
-  background: #020817;
+  background: #101519;
 }
 
 * {
@@ -16,3 +16,36 @@ button {
 body {
   min-height: 100vh;
 }
+
+.dashboard { min-height: 100vh; display: flex; background: #101519; color: #e3e9eb; }
+.dash-sidebar { width: 250px; flex: 0 0 250px; padding: 28px 20px; display: flex; flex-direction: column; border-right: 1px solid #2a343b; background: #151b20; }
+.brand span, .page-intro small, .panel-heading small, .dash-header small { display: block; color: #9bb7b0; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+.brand strong { display: block; margin-top: 10px; font-size: 17px; color: #fff; }
+.dash-sidebar nav { margin-top: 52px; display: grid; gap: 6px; }
+.dash-sidebar nav button { padding: 12px 14px; border: 0; border-left: 2px solid transparent; background: transparent; color: #8495a8; text-align: left; cursor: pointer; }
+.dash-sidebar nav button:hover, .dash-sidebar nav button.active { border-left-color: #9bb7b0; background: #202c2e; color: #eef5f3; }
+.dash-sidebar > small { margin-top: auto; padding-top: 20px; border-top: 1px solid #2a343b; color: #75838b; line-height: 1.7; }
+.close-nav, .menu-button { display: none; }
+.nav-overlay { display: none; }
+.dash-main { min-width: 0; flex: 1; }
+.dash-header { min-height: 92px; padding: 22px clamp(20px, 5vw, 64px); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2a343b; }
+.dash-header h1, .page-intro h2, .panel-heading h2 { margin: 5px 0 0; color: #fff; font-weight: 600; }
+.dash-header h1 { font-size: clamp(24px, 3vw, 34px); }
+.primary-button { padding: 10px 16px; border: 1px solid #9bb7b0; background: transparent; color: #c5d8d3; cursor: pointer; }
+.primary-button:hover { background: #202c2e; }
+.dash-content { max-width: 1240px; margin: auto; padding: 42px clamp(20px, 5vw, 64px); }
+.page-intro small, .panel-heading small { color: #829099; letter-spacing: .14em; }
+.page-intro h2 { font-size: 20px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
+.dash-stat { min-height: 150px; padding: 20px; border: 1px solid #334149; background: #182126; }
+.dash-stat p, .dash-stat span, .panel-heading span { display: block; color: #829099; font-size: 12px; }
+.dash-stat strong { display: block; margin: 22px 0 6px; color: #fff; font-size: 36px; line-height: 1; }
+.dash-stat.cyan { border-color: #587e7b; background: #1a292b; }.dash-stat.red { border-color: #80565d; background: #281d21; }.dash-stat.amber { border-color: #806d4d; background: #29251d; }
+.dashboard-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-top: 28px; }
+.dash-panel { min-height: 250px; border: 1px solid #2a343b; background: #182126; }
+.panel-heading { padding: 20px; display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid #2a343b; }.panel-heading h2 { font-size: 17px; }
+.state { margin: 0; padding: 28px 20px; color: #829099; font-size: 14px; }.state.error { margin-top: 22px; padding: 12px 16px; border: 1px solid #80565d; color: #e6b9bf; }
+.frequency { padding: 13px 20px 0; }.frequency > div { display: flex; justify-content: space-between; color: #cbd6d8; font-size: 13px; }.frequency b { color: #fff; }.frequency i { display: block; height: 5px; margin-top: 8px; background: #2b3940; }.frequency em { display: block; height: 100%; background: #9bb7b0; }
+@media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); }.dashboard-grid { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .dash-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 4; transform: translateX(-100%); transition: transform .2s; }.dash-sidebar.is-open { transform: translateX(0); }.close-nav, .menu-button { display: block; }.close-nav { position: absolute; top: 25px; right: 18px; border: 0; background: transparent; color: #94a1a7; font-size: 24px; }.nav-overlay { display: block; position: fixed; inset: 0; z-index: 3; border: 0; background: #101519cc; }.menu-button { margin-right: 14px; border: 1px solid #394952; background: transparent; color: #d0dadd; font-size: 18px; }.dash-header { justify-content: flex-start; }.primary-button { margin-left: auto; }.dash-header > div { min-width: 0; }.dash-header h1 { font-size: 25px; } }
+@media (max-width: 460px) { .stats-grid { grid-template-columns: 1fr; }.dash-content { padding-top: 28px; }.primary-button { padding: 9px 10px; font-size: 12px; } }

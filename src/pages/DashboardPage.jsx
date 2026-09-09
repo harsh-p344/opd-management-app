@@ -1,105 +1,44 @@
 import { useEffect, useState } from 'react';
 import { fetchDashboardStats } from '../services/dashboardService';
+import { DashboardHeader, DashboardPanels, Sidebar, StatCard } from '../components/dashboard';
 
-const quickActions = ['New Patient', 'Prescription', 'Stock Entry', 'Expiry Review'];
+const initialStats = { totalPatients: 0, totalMedicines: 0, expiredMedicines: 0, lowStock: 0 };
+const statCards = [
+  ['Total patients', 'totalPatients', 'Registered OPD records', 'cyan'],
+  ['Total medicines', 'totalMedicines', 'Tracked inventory items', 'slate'],
+  ['Expired medicines', 'expiredMedicines', 'Requires stock review', 'red'],
+  ['Low stock', 'lowStock', 'At reorder level', 'amber'],
+];
 
 const DashboardPage = () => {
-  const [stats, setStats] = useState({
-    totalPatients: 0,
-    totalMedicines: 0,
-    expiredMedicines: 0,
-    nearExpiry: 0,
-    lowStock: 0,
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [active, setActive] = useState('Overview');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [stats, setStats] = useState(initialStats);
+  const [status, setStatus] = useState('loading');
 
   useEffect(() => {
-    const loadStats = async () => {
-      try {
-        setLoading(true);
-        setError('');
-        const data = await fetchDashboardStats();
-        setStats(data);
-      } catch (loadError) {
-        setError(loadError.message || 'Failed to load dashboard statistics');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadStats();
+    fetchDashboardStats()
+      .then((data) => { setStats((current) => ({ ...current, ...data })); setStatus('ready'); })
+      .catch(() => setStatus('error'));
   }, []);
 
-  const statCards = [
-    { label: 'Total Patients', value: stats.totalPatients },
-    { label: 'Total Medicines', value: stats.totalMedicines },
-    { label: 'Expired Medicines', value: stats.expiredMedicines },
-    { label: 'Near Expiry', value: stats.nearExpiry },
-    { label: 'Low Stock', value: stats.lowStock },
-  ];
+  const selectNav = (item) => { setActive(item); setMenuOpen(false); };
+  const value = (number) => status === 'loading' ? '—' : number;
 
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-10 text-slate-100">
-      <div className="mx-auto max-w-6xl">
-        <header className="mb-8 flex items-center justify-between border-b border-slate-800 pb-6">
-          <div>
-            <p className="text-sm uppercase tracking-[0.25em] text-cyan-400">Clinic OPD</p>
-            <h1 className="mt-2 text-3xl font-bold text-white">Management Dashboard</h1>
-          </div>
-          <button className="rounded-lg bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">
-            Add Patient
-          </button>
-        </header>
-
-        {error ? (
-          <div className="mb-6 rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-            {error}
-          </div>
-        ) : null}
-
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-          {statCards.map((stat) => (
-            <article key={stat.label} className="rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-lg shadow-slate-950/30">
-              <p className="text-sm text-slate-400">{stat.label}</p>
-              <p className="mt-3 text-3xl font-bold text-white">
-                {loading ? '...' : stat.value}
-              </p>
-            </article>
-          ))}
-        </section>
-
-        <section className="mt-8 grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
-            <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-white">Quick Actions</h2>
-              <span className="rounded-full bg-emerald-500/15 px-2.5 py-1 text-xs font-medium text-emerald-300">
-                Live
-              </span>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {quickActions.map((action) => (
-                <button
-                  key={action}
-                  className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-cyan-500 hover:text-cyan-300"
-                >
-                  {action}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
-            <h2 className="text-xl font-semibold text-white">System Health</h2>
-            <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              <li className="flex items-center justify-between"><span>API</span><span className="text-emerald-400">{loading ? 'Checking' : 'Online'}</span></li>
-              <li className="flex items-center justify-between"><span>MongoDB</span><span className="text-emerald-400">Connected</span></li>
-              <li className="flex items-center justify-between"><span>Inventory</span><span className="text-yellow-400">Monitor</span></li>
-            </ul>
-          </div>
-        </section>
-      </div>
-    </main>
+    <div className="flex min-h-screen bg-white text-slate-700">
+      <Sidebar active={active} open={menuOpen} onSelect={selectNav} onClose={() => setMenuOpen(false)} />
+      <main className="min-w-0 flex-1 bg-slate-50 [background-image:linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)] [background-size:32px_32px]">
+        <DashboardHeader active={active} onOpenMenu={() => setMenuOpen(true)} />
+        <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-12 lg:py-10">
+          {status === 'error' && <div className="mb-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700 shadow-sm" role="alert">Dashboard data could not be loaded.</div>}
+          <section className="grid auto-rows-fr items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-4" aria-label="Key metrics">
+            {statCards.map(([label, key, note, tone]) => <StatCard key={key} label={label} value={value(stats[key])} note={note} tone={tone} />)}
+          </section>
+          <DashboardPanels />
+        </div>
+      </main>
+    </div>
   );
 };
 
