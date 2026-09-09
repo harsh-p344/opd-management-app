@@ -48,3 +48,23 @@ export const calculateDashboardStats = ({ medicines = [], patients = [] }) => {
     lowStock,
   };
 };
+
+export const calculateComplaintFrequency = (patients = []) => {
+  const frequencies = new Map();
+
+  patients.forEach((patient) => {
+    (patient.clinicalDetails?.symptoms || []).forEach((symptom) => {
+      const complaint = symptom.trim();
+
+      if (complaint) {
+        const key = complaint.toLowerCase();
+        const current = frequencies.get(key) || { label: complaint, count: 0 };
+        frequencies.set(key, { ...current, count: current.count + 1 });
+      }
+    });
+  });
+
+  return [...frequencies.values()]
+    .sort((first, second) => second.count - first.count || first.label.localeCompare(second.label))
+    .slice(0, 6);
+};
