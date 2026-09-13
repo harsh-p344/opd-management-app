@@ -102,28 +102,28 @@ Done when: The dashboard displays live data.
 
 ### 2.3 Dashboard Rebuild
 
-- [ ] Structure: Layout → Sidebar + Header + MainContent
-- [ ] Top: 4 StatCards for key metrics
-- [ ] Bottom: Recent OPD Entries + Complaint Frequency
-- [ ] UX: API-ready data, actions, loading/empty/error states
-- [ ] Responsive: Desktop/tablet/mobile layouts and navigation
-- [ ] Design: Premium futuristic UI, restrained palette, clear hierarchy
-- [ ] Quality: Reusable, accessible, consistent, no overflow/errors
+- [x] Structure: Layout → Sidebar + Header + MainContent
+- [x] Top: 4 StatCards for key metrics
+- [x] Bottom: Recent OPD Entries + Complaint Frequency
+- [x] UX: API-ready data, actions, loading/empty/error states
+- [x] Responsive: Desktop/tablet/mobile layouts and navigation
+- [x] Design: Premium futuristic UI, restrained palette, clear hierarchy
+- [x] Quality: Reusable, accessible, consistent, no overflow/errors
 
 ### Done When
 
-- [ ] UI, data, and interactions work
-- [ ] Responsive across all screen sizes
-- [ ] No broken states, overflow, or console errors
-- [ ] Accessible and production-ready
+- [x] UI, data, and interactions work
+- [x] Responsive across all screen sizes
+- [x] No broken states, overflow, or console errors
+- [x] Accessible and production-ready
 
 ## Medicine inventory
 
 ### 3.1 Medicine model
 
-- [ ] Medicine model
-- [ ] Batch schema
-- [ ] Automatic total stock calculation
+- [x] Medicine model
+- [x] Batch schema
+- [x] Automatic total stock calculation
 
 Done when: Medicine and batch data are stored correctly and stock totals stay consistent.
 
