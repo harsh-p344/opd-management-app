@@ -129,12 +129,12 @@ Done when: Medicine and batch data are stored correctly and stock totals stay co
 
 ### 3.2 Medicine API
 
-- [ ] Create medicine
-- [ ] Update medicine
-- [ ] Delete medicine
-- [ ] Search medicines
-- [ ] Pagination
-- [ ] Filters
+- [x] Create medicine
+- [x] Update medicine
+- [x] Delete medicine
+- [x] Search medicines
+- [x] Pagination
+- [x] Filters
 
 Done when: Inventory CRUD, validation, authentication, and business rules work.
 
