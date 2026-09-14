@@ -65,7 +65,7 @@ name (req) | genericName | category | unit (req) | batches[] | totalStock (deriv
 
 ### Batch (embedded in Medicine)
 ```
-batchNumber (req) | quantity (≥0) | purchasePrice (≥0) | sellingPrice (≥0) | expiryDate (req)
+batchNumber (req) | quantity (≥0) | purchasePrice (≥0) | sellingPrice (≥0) | purchaseDate (req) | supplierName (req) | expiryDate (req) 
 ```
 
 ### StockBill
@@ -202,11 +202,15 @@ GET /api/dashboard/complaints
 ### Medicines
 ```
 POST   /api/medicines
-GET    /api/medicines
+GET    /api/medicines?search=&category=&stockStatus=&expiryStatus=&page=&limit=
 GET    /api/medicines/:id
 PATCH  /api/medicines/:id
 DELETE /api/medicines/:id
 ```
+
+- `stockStatus`: `low | out | ok`
+- `expiryStatus`: `expired | near | valid`
+- `page` and `limit` must be positive whole numbers
 
 ### Stock Bills
 ```

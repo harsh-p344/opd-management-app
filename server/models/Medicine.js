@@ -84,12 +84,11 @@ const medicineSchema = new mongoose.Schema(
 const calculateTotalStock = (batches = []) =>
   batches.reduce((sum, batch) => sum + Number(batch.quantity || 0), 0);
 
-medicineSchema.pre('save', function calculateStock(next) {
+medicineSchema.pre('save', function calculateStock() {
   this.totalStock = calculateTotalStock(this.batches);
-  next();
 });
 
-medicineSchema.pre(['findOneAndUpdate', 'updateOne'], function calculateStock(next) {
+medicineSchema.pre(['findOneAndUpdate', 'updateOne'], function calculateStock() {
   const update = this.getUpdate();
 
   if (update && update.$set && Array.isArray(update.$set.batches)) {
@@ -98,7 +97,6 @@ medicineSchema.pre(['findOneAndUpdate', 'updateOne'], function calculateStock(ne
     update.totalStock = calculateTotalStock(update.batches);
   }
 
-  next();
 });
 
 const Medicine = mongoose.model('Medicine', medicineSchema);
