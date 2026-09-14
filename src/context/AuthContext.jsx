@@ -1,10 +1,21 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { getCurrentUser } from '../services/authService';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    getCurrentUser()
+      .then((currentUser) => {
+        setUser(currentUser);
+        setIsAuthenticated(Boolean(currentUser));
+      })
+      .finally(() => setAuthLoading(false));
+  }, []);
 
   const value = useMemo(
     () => ({
@@ -12,8 +23,9 @@ export const AuthProvider = ({ children }) => {
       setUser,
       isAuthenticated,
       setIsAuthenticated,
+      authLoading,
     }),
-    [user, isAuthenticated]
+    [user, isAuthenticated, authLoading]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
