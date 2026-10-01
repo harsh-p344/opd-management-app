@@ -9,6 +9,7 @@ import healthRoutes from './routes/healthRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
 import medicineRoutes from './routes/medicineRoutes.js';
+import patientRecordRoutes from './routes/patientRecordRoutes.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use('/api', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/medicines', medicineRoutes);
+app.use('/api/patient-records', patientRecordRoutes);
 
 app.get('/', (_req, res) => {
   res.send('OPD Management API is running');

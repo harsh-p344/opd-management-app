@@ -1,3 +1,4 @@
+import process from 'node:process';
 import { sendError } from '../utils/response.js';
 
 export const notFound = (req, res, next) => {
@@ -7,7 +8,8 @@ export const notFound = (req, res, next) => {
 };
 
 export const errorHandler = (err, req, res, next) => {
-  const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
+  void next;
+  const statusCode = err.statusCode || (res.statusCode !== 200 ? res.statusCode : 500);
 
   sendError(
     res,
