@@ -81,8 +81,12 @@ const medicineSchema = new mongoose.Schema(
   }
 );
 
-const calculateTotalStock = (batches = []) =>
-  batches.reduce((sum, batch) => sum + Number(batch.quantity || 0), 0);
+const calculateTotalStock = (batches = []) => {
+  const now = new Date();
+  return batches.reduce((sum, batch) => (
+    new Date(batch.expiryDate) > now ? sum + Number(batch.quantity || 0) : sum
+  ), 0);
+};
 
 medicineSchema.pre('save', function calculateStock() {
   this.totalStock = calculateTotalStock(this.batches);
@@ -91,6 +95,10 @@ medicineSchema.pre('save', function calculateStock() {
 medicineSchema.pre(['findOneAndUpdate', 'updateOne'], function calculateStock() {
   const update = this.getUpdate();
 
+  if (update?.$inc?.totalStock !== undefined) {
+    return;
+  }
+
   if (update && update.$set && Array.isArray(update.$set.batches)) {
     update.$set.totalStock = calculateTotalStock(update.$set.batches);
   } else if (update && Array.isArray(update.batches)) {
@@ -98,6 +106,8 @@ medicineSchema.pre(['findOneAndUpdate', 'updateOne'], function calculateStock() 
   }
 
 });
+
+medicineSchema.index({ 'batches.expiryDate': 1 });
 
 const Medicine = mongoose.model('Medicine', medicineSchema);
 
