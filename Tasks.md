@@ -140,66 +140,31 @@ Done when: Inventory CRUD, validation, authentication, and business rules work.
 
 ### 3.3 Medicine Page
 
-- [ ] Structure: Layout → Sidebar + Header + MainContent
-- [ ] Top: 4 Stats — Total, Low Stock, Near Expiry, Expired
-- [ ] Bottom: Medicine inventory table — stock, batch, expiry, status, actions
-- [ ] UX: Search, filters, pagination, API-ready states
-- [ ] Responsive: Desktop/tablet/mobile, no overflow
-- [ ] Design: Premium, futuristic, clear hierarchy
-- [ ] Quality: Accessible, reusable, consistent, no errors
+- [x] Structure: Layout → Sidebar + Header + MainContent
+- [x] Top: 4 Stats — Total, Low Stock, Near Expiry, Expired
+- [x] Bottom: Medicine inventory table — stock, batch, expiry, status, actions
+- [x] UX: Search, filters, pagination, API-ready states
+- [x] Responsive: Desktop/tablet/mobile, no overflow
+- [x] Design: Premium, futuristic, clear hierarchy
+- [x] Quality: Accessible, reusable, consistent, no errors
 
 ### Done When
 
-- [ ] All data/actions work
-- [ ] Responsive and accessible
-- [ ] No broken states or overflow
-
-## Stock bills
-
-### 4.1 Stock bill model
-
-- [ ] StockBill model
-- [ ] Bill number generator
-
-Done when: Bills are stored correctly.
-
-### 4.2 Stock bill API
-
-- [ ] Create bill endpoint
-- [ ] Add stock automatically
-- [ ] Create missing medicine
-- [ ] List bills
-- [ ] View bill details
-
-Done when: Bills update inventory correctly and operations are atomic.
-
-### 4.3 Stock Management
-
-- [ ] Structure: Layout → Sidebar + Header + MainContent
-- [ ] Left: Stock Bills list/history
-- [ ] Top: Add Medicine — Name, Price, Expiry, Purchase Date, Supplier + Add
-- [ ] Bottom: Added medicines, cost, Bill No. + Submit
-- [ ] Business: Submit saves bill and increases stock
-- [ ] UX: API-ready, responsive, loading/empty/error states
-- [ ] Quality: Accessible, reusable, no errors
-
-### Done When
-
-- [ ] Add medicines and submit bills
-- [ ] Stock updates correctly
-- [ ] Responsive and error-free
+- [x] All data/actions work
+- [x] Responsive and accessible
+- [x] No broken states or overflow
 
 ## OPD management
 
-### 5.1 Patient model
+### 4.1 Patient model
 
-- [ ] Patient model
-- [ ] Prescription schema
-- [ ] Validation rules
+- [x] Patient model
+- [x] Prescription schema
+- [x] Validation rules
 
 Done when: Patient and prescription data are stored correctly.
 
-### 5.2 Patient API
+### 4.2 Patient API
 
 - [ ] Create patient
 - [ ] Validate medicine stock
@@ -211,7 +176,7 @@ Done when: Patient and prescription data are stored correctly.
 
 Done when: OPD records and stock deduction work end to end.
 
-### 5.3 OPD Page
+### 4.3 OPD Page
 
 - [ ] Structure: Layout → Sidebar + Header + MainContent
 - [ ] Top: OPD patient form with all required patient/visit fields
@@ -225,6 +190,41 @@ Done when: OPD records and stock deduction work end to end.
 
 - [ ] OPD records can be submitted and displayed
 - [ ] All form data appears correctly in the table
+- [ ] Responsive and error-free
+
+## Stock bills
+
+### 5.1 Stock bill model
+
+- [ ] StockBill model
+- [ ] Bill number generator
+
+Done when: Bills are stored correctly.
+
+### 5.2 Stock bill API
+
+- [ ] Create bill endpoint
+- [ ] Add stock automatically
+- [ ] Create missing medicine
+- [ ] List bills
+- [ ] View bill details
+
+Done when: Bills update inventory correctly and operations are atomic.
+
+### 5.3 Stock Management
+
+- [ ] Structure: Layout → Sidebar + Header + MainContent
+- [ ] Left: Stock Bills list/history
+- [ ] Top: Add Medicine — Name, Price, Expiry, Purchase Date, Supplier + Add
+- [ ] Bottom: Added medicines, cost, Bill No. + Submit
+- [ ] Business: Submit saves bill and increases stock
+- [ ] UX: API-ready, responsive, loading/empty/error states
+- [ ] Quality: Accessible, reusable, no errors
+
+### Done When
+
+- [ ] Add medicines and submit bills
+- [ ] Stock updates correctly
 - [ ] Responsive and error-free
 
 ## Expiry management
