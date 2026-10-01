@@ -166,31 +166,31 @@ Done when: Patient and prescription data are stored correctly.
 
 ### 4.2 Patient API
 
-- [ ] Create patient
-- [ ] Validate medicine stock
-- [ ] Deduct stock
-- [ ] List patients
-- [ ] Search patients
-- [ ] Pagination
-- [ ] View patient
+- [x] Create patient
+- [x] Validate medicine stock
+- [x] Deduct stock
+- [x] List patients
+- [x] Search patients
+- [x] Pagination
+- [x] View patient
 
 Done when: OPD records and stock deduction work end to end.
 
 ### 4.3 OPD Page
 
-- [ ] Structure: Layout → Sidebar + Header + MainContent
-- [ ] Top: OPD patient form with all required patient/visit fields
-- [ ] Bottom: Patient records table displaying all submitted form data
-- [ ] Business: Form submission creates a patient/OPD record
-- [ ] UX: API-ready, loading/empty/error states, clear feedback
-- [ ] Responsive: Desktop/tablet/mobile without overflow
-- [ ] Quality: Accessible, reusable, consistent, no errors
+- [x] Structure: Layout → Sidebar + Header + MainContent
+- [x] Top: OPD patient form with all required patient/visit fields
+- [x] Bottom: Patient records table displaying all submitted form data
+- [x] Business: Form submission creates a patient/OPD record
+- [x] UX: API-ready, loading/empty/error states, clear feedback
+- [x] Responsive: Desktop/tablet/mobile without overflow
+- [x] Quality: Accessible, reusable, consistent, no errors
 
 ### Done When
 
-- [ ] OPD records can be submitted and displayed
-- [ ] All form data appears correctly in the table
-- [ ] Responsive and error-free
+- [x] OPD records can be submitted and displayed
+- [x] All form data appears correctly in the table
+- [x] Responsive and error-free
 
 ## Stock bills
 
