@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import MedicinePage from './pages/MedicinePage.jsx';
+import OPDPage from './pages/OPDPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -27,6 +28,14 @@ createRoot(document.getElementById('root')).render(
             element={
               <ProtectedRoute>
                 <MedicinePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/opd"
+            element={
+              <ProtectedRoute>
+                <OPDPage />
               </ProtectedRoute>
             }
           />

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-const navItems = [['Overview', '/'], ['Patients', '#'], ['Medicines', '/medicines'], ['Stock bills', '#'], ['Expiry', '#']];
+const navItems = [['Overview', '/'], ['Patients', '/opd'], ['Medicines', '/medicines'], ['Stock bills', '#'], ['Expiry', '#']];
 
 const Sidebar = ({ active, open, onSelect, onClose }) => (
   <>
