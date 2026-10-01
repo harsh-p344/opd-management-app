@@ -25,7 +25,7 @@ const patientSchema = new mongoose.Schema(
     age: {
       type: Number,
       min: 0,
-      default: 0,
+      default: null,
     },
     gender: {
       type: String,
@@ -35,6 +35,9 @@ const patientSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+patientSchema.index({ employeeCode: 1 });
+patientSchema.index({ department: 1 });
 
 const Patient = mongoose.model('Patient', patientSchema);
 

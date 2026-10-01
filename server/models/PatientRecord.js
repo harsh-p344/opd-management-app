@@ -26,13 +26,27 @@ const medicineUsedSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const batchAllocationSchema = new mongoose.Schema(
+  {
+    batchId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    quantity: { type: Number, required: true, min: 1 },
+  },
+  { _id: false }
+);
+
+medicineUsedSchema.add({ batchAllocations: [batchAllocationSchema] });
+
 const patientRecordSchema = new mongoose.Schema(
   {
     patientId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Patient',
       required: true,
-      index: true,
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
     complaint: {
       type: String,
@@ -79,10 +93,21 @@ const patientRecordSchema = new mongoose.Schema(
       trim: true,
       default: '',
     },
+    deletedAt: {
+      type: Date,
+      default: null,
+    },
+    deletedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      default: null,
+    },
     medicines: [medicineUsedSchema],
   },
   { timestamps: true }
 );
+
+patientRecordSchema.index({ patientId: 1, deletedAt: 1, createdAt: -1 });
 
 const PatientRecord = mongoose.model('PatientRecord', patientRecordSchema);
 
